@@ -86,7 +86,7 @@ export default function ContactPage() {
                 </label>
                 <button
                   type="submit"
-                  className="sm:col-span-2 w-fit bg-safety-yellow px-5 py-3 text-sm font-black uppercase text-safety-black hover:bg-safety-black hover:text-safety-yellow"
+                  className="sm:col-span-2 w-fit bg-safety-yellow px-5 py-3 text-sm font-black uppercase text-white hover:bg-safety-black hover:text-safety-yellow"
                 >
                   Submit Inquiry
                 </button>

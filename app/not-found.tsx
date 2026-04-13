@@ -10,7 +10,7 @@ export default function NotFoundPage() {
       </p>
       <Link
         href="/"
-        className="mt-6 inline-block bg-safety-yellow px-5 py-3 text-sm font-black uppercase text-safety-black hover:bg-safety-black hover:text-safety-yellow"
+        className="mt-6 inline-block bg-safety-yellow px-5 py-3 text-sm font-black uppercase text-white hover:bg-safety-black hover:text-safety-yellow"
       >
         Back To Home
       </Link>

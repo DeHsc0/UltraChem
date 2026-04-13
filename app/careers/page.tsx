@@ -57,7 +57,7 @@ export default function CareersPage() {
                 <p className="mt-3 text-sm text-safety-gray">{opening.description}</p>
                 <a
                   href={`mailto:${companyInfo.email}?subject=Career%20Application%20for%20${encodeURIComponent(opening.role)}`}
-                  className="mt-5 inline-flex items-center gap-2 bg-safety-yellow px-4 py-2 text-xs font-black uppercase text-safety-black hover:bg-safety-black hover:text-safety-yellow"
+                  className="mt-5 inline-flex items-center gap-2 bg-safety-yellow px-4 py-2 text-xs font-black uppercase text-white hover:bg-safety-black hover:text-safety-yellow"
                 >
                   <Mail className="h-3.5 w-3.5" />
                   Apply Now

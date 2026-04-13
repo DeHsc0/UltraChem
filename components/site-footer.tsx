@@ -29,7 +29,7 @@ export function SiteFooter() {
     <footer className="mt-10 border-t-4 border-safety-yellow bg-safety-black text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-4">
         <div>
-          <p className="text-2xl font-black uppercase tracking-wide text-safety-yellow">
+          <p className="text-2xl font-black uppercase tracking-wide text-white">
             UltraChem
           </p>
           <p className="mt-4 text-sm leading-relaxed text-white/80">
@@ -39,7 +39,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h3 className="text-sm font-black uppercase tracking-[0.2em] text-safety-yellow">
+          <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white">
             About
           </h3>
           <ul className="mt-4 space-y-2 text-sm text-white/80">
@@ -54,7 +54,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h3 className="text-sm font-black uppercase tracking-[0.2em] text-safety-yellow">
+          <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white">
             Popular Categories
           </h3>
           <ul className="mt-4 space-y-2 text-sm text-white/80">
@@ -65,7 +65,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h3 className="text-sm font-black uppercase tracking-[0.2em] text-safety-yellow">
+          <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white">
             Product Categories
           </h3>
           <ul className="mt-4 space-y-2 text-sm text-white/80">

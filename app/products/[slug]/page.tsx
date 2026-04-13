@@ -109,7 +109,7 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
                 </p>
                 <Link
                   href={product.tdsUrl}
-                  className="mt-4 inline-flex items-center gap-2 bg-safety-yellow px-4 py-2 text-sm font-black uppercase text-safety-black hover:bg-safety-black hover:text-safety-yellow"
+                  className="mt-4 inline-flex items-center gap-2 bg-safety-yellow px-4 py-2 text-sm font-black uppercase text-white hover:bg-safety-black hover:text-safety-yellow"
                 >
                   <Download className="h-4 w-4" />
                   Download TDS

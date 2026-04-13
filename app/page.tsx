@@ -159,8 +159,8 @@ export default function HomePage() {
             {differentiators.map((item, index) => (
               <GsapReveal key={item.title} delay={index * 0.05} className="h-full">
                 <article className="h-full border border-white/20 bg-white/5 p-5">
-                  <BadgeCheck className="h-5 w-5 text-safety-yellow" />
-                  <h3 className="mt-3 text-xl font-black uppercase text-safety-yellow">
+                  <BadgeCheck className="h-5 w-5 text-white" />
+                  <h3 className="mt-3 text-xl font-black uppercase text-white">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-sm text-white/80">{item.description}</p>

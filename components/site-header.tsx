@@ -69,7 +69,7 @@ function DropdownPanel({
               <Link
                 key={link.href + link.label}
                 href={link.href}
-                className="block px-3 py-2 text-sm font-semibold uppercase tracking-wide text-safety-black transition hover:bg-safety-yellow hover:text-safety-black"
+                className="block px-3 py-2 text-sm font-semibold uppercase tracking-wide text-safety-black transition hover:bg-safety-yellow hover:text-white"
               >
                 {link.label}
               </Link>
@@ -187,7 +187,7 @@ export function SiteHeader() {
           <p>{companyInfo.hours}</p>
           <a
             href={`tel:${companyInfo.phone.replace(/\s+/g, "")}`}
-            className="inline-flex items-center gap-2 font-semibold text-safety-yellow"
+            className="inline-flex items-center gap-2 font-semibold text-white"
           >
             <Phone className="h-3.5 w-3.5" />
             {companyInfo.phone}
@@ -280,7 +280,7 @@ export function SiteHeader() {
 
           <Link
             href="/contact"
-            className="hidden rounded-none bg-safety-yellow px-5 py-2 text-sm font-extrabold uppercase text-safety-black transition hover:bg-safety-black hover:text-safety-yellow lg:inline-block"
+            className="hidden rounded-none bg-safety-yellow px-5 py-2 text-sm font-extrabold uppercase text-white transition hover:bg-safety-black hover:text-safety-yellow lg:inline-block"
           >
             Get A Quote
           </Link>
@@ -607,7 +607,7 @@ export function SiteHeader() {
               </Link>
               <Link
                 href="/contact"
-                className="mt-2 inline-flex w-fit bg-safety-yellow px-4 py-2 text-xs font-black uppercase text-safety-black"
+                className="mt-2 inline-flex w-fit bg-safety-yellow px-4 py-2 text-xs font-black uppercase text-white"
                 onClick={() => {
                   setOpen(false);
                   setMobileMenu(null);

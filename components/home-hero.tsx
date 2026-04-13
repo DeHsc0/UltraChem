@@ -67,7 +67,7 @@ export function HomeHero() {
         <div ref={actionsRef} className="mt-8 flex flex-wrap gap-4">
           <Link
             href="/products"
-            className="bg-safety-yellow px-5 py-3 text-sm font-black uppercase tracking-wide text-safety-black hover:bg-white"
+            className="bg-safety-yellow px-5 py-3 text-sm font-black uppercase tracking-wide text-white hover:bg-white hover:text-safety-black"
           >
             Explore Products
           </Link>

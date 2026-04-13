@@ -26,7 +26,7 @@ export function PageHero({
       <div className="absolute inset-0 bg-black/45" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24">
-        <p className="inline-flex bg-safety-yellow px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-safety-black">
+        <p className="inline-flex bg-safety-yellow px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-white">
           {accent}
         </p>
         <h1 className="mt-5 max-w-3xl text-4xl font-black uppercase leading-tight sm:text-5xl">

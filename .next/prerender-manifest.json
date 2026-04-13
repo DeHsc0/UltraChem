@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "5ed94eb13660eb5cb8727742a85e76f3",
-    "previewModeSigningKey": "c1d79d9cf8211b9e751826e169e5791e85b2b535d67e5bf525eab7cd70f9f525",
-    "previewModeEncryptionKey": "0387d6f4b57bb84a969ab7614259719d38690e4bd8dd3b27316e8125a434ba67"
-  }
-}
+{"version":4,"routes":{"/products/ultramix-pc-m":{},"/products/ultramix-pc-h":{},"/products/ultramix-pc":{},"/products/ultrashield-ttci":{},"/products/ultracure-rb-7":{},"/products/ultracure-rb7":{},"/products/ultracure-wb-7":{},"/products/ultracure-wb":{},"/products/ultra-liquid-plus":{},"/products/ultraliquid-plus":{},"/products/ultra-seal-ps":{},"/products/polysulphide-sealant-ps":{},"/products/ultraseal-pu":{},"/products/ultraprime":{},"/products/ultraheal-2106":{},"/products/ultrashield-0702":{},"/products/ultraguard-st":{},"/products/ultradeck-seal":{}},"dynamicRoutes":{"/products/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/products/[slug]","routeRegex":"^\\/products\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"2f72675f3ca414ca5d6dedc42f2f8c29","previewModeSigningKey":"0974ff3ff613f14f95a11690f00c698f6a8a198162e676ea2454c9586f142e13","previewModeEncryptionKey":"820da4a347c6298f879a2d165cb449fbe848b661aa47d9e855e375554b9b4e98"}}
