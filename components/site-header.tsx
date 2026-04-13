@@ -4,9 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { companyInfo, menuLinks, navMenu } from "@/lib/site-data";
+import { companyInfo, navMenu } from "@/lib/site-data";
 
 type DropdownLink = {
   label: string;
@@ -169,7 +169,16 @@ function DropdownPanel({
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState<string | null>(null);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-50 shadow-panel">
@@ -287,31 +296,328 @@ export function SiteHeader() {
         </div>
 
         {open ? (
-          <div className="border-t border-black/10 bg-white px-4 py-4 lg:hidden">
-            <nav className="flex flex-col gap-4">
-              {menuLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "text-sm font-bold uppercase tracking-wide",
-                    pathname === link.href
-                      ? "text-safety-yellow"
-                      : "text-safety-black"
-                  )}
-                  onClick={() => setOpen(false)}
+          <div className="fixed inset-0 z-[60] lg:hidden">
+            <button
+              type="button"
+              className="absolute inset-0 bg-black/35"
+              onClick={() => {
+                setOpen(false);
+                setMobileMenu(null);
+              }}
+              aria-label="Close menu backdrop"
+            />
+
+            <aside className="no-scrollbar absolute left-0 top-0 h-dvh w-[min(86vw,22rem)] overflow-y-auto overscroll-contain border-r border-black/10 bg-white shadow-panel">
+              <div className="flex items-center justify-between border-b border-black/10 px-4 py-4">
+                <p className="text-sm font-black uppercase tracking-wide text-safety-black">
+                  Menu
+                </p>
+                <button
+                  type="button"
+                  className="inline-flex rounded-sm border border-safety-black p-2 text-safety-black"
+                  onClick={() => {
+                    setOpen(false);
+                    setMobileMenu(null);
+                  }}
+                  aria-label="Close menu"
                 >
-                  {link.label}
-                </Link>
-              ))}
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="px-4 py-4">
+                <nav className="flex flex-col gap-3">
+              <Link
+                href="/about"
+                className={cn(
+                  "text-sm font-bold uppercase tracking-wide",
+                  pathname === "/about" ? "text-safety-yellow" : "text-safety-black"
+                )}
+                onClick={() => setOpen(false)}
+              >
+                About Us
+              </Link>
+
+              <div className="rounded-none border border-black/10 bg-safety-light/60">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase tracking-wide text-safety-black"
+                  onClick={() =>
+                    setMobileMenu((current) =>
+                      current === "products" ? null : "products"
+                    )
+                  }
+                >
+                  Products
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 transition-transform",
+                      mobileMenu === "products" && "rotate-180"
+                    )}
+                  />
+                </button>
+
+                {mobileMenu === "products" ? (
+                  <div className="mx-3 mb-3 rounded-none border border-black/10 bg-white p-3">
+                    <div className="space-y-3">
+                      <div>
+                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                          Concrete Admixtures
+                        </p>
+                        <div className="mt-2 space-y-1 pl-4">
+                          <Link
+                            href="/products/ultramix-pc-m"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            ULTRAMIX PC-M
+                          </Link>
+                          <Link
+                            href="/products/ultramix-pc-h"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            ULTRAMIX PC-H
+                          </Link>
+                          <Link
+                            href="/products/ultramix-pc"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            ULTRAMIX PC
+                          </Link>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                          Corrosion Inhibitors
+                        </p>
+                        <div className="mt-2 space-y-1 pl-4">
+                          <Link
+                            href="/products/ultrashield-ttci"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            UltraShield TTCI
+                          </Link>
+                          <Link
+                            href="/products/ultraguard-st"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            UltraGuard ST
+                          </Link>
+                          <Link
+                            href="/products/ultrashield-0702"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            ULTRASHIELD 0702
+                          </Link>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                          Curing Compounds
+                        </p>
+                        <div className="mt-2 space-y-1 pl-4">
+                          <Link
+                            href="/products/ultracure-rb7"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            UltraCure RB7
+                          </Link>
+                          <Link
+                            href="/products/ultracure-wb"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            UltraCure WB
+                          </Link>
+                          <Link
+                            href="/products/ultracure-rb-7"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            ULTRACURE RB 7
+                          </Link>
+                          <Link
+                            href="/products/ultracure-wb-7"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            ULTRACURE WB 7
+                          </Link>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                          Joint Sealants
+                        </p>
+                        <div className="mt-2 space-y-1 pl-4">
+                          <Link
+                            href="/products/polysulphide-sealant-ps"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            Polysulphide Sealant (PS)
+                          </Link>
+                          <Link
+                            href="/products/ultraseal-pu"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            Polyurethane Sealant (PU)
+                          </Link>
+                          <Link
+                            href="/products/ultraprime"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            UltraPrime
+                          </Link>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                          Waterproofing Systems
+                        </p>
+                        <div className="mt-2 space-y-1 pl-4">
+                          <Link
+                            href="/products/ultradeck-seal"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            UltraDeck Seal
+                          </Link>
+                          <Link
+                            href="/products/ultraliquid-plus"
+                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            UltraLiquid Plus
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="rounded-none border border-black/10 bg-safety-light/60">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase tracking-wide text-safety-black"
+                  onClick={() =>
+                    setMobileMenu((current) =>
+                      current === "sectors" ? null : "sectors"
+                    )
+                  }
+                >
+                  Sectors
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 transition-transform",
+                      mobileMenu === "sectors" && "rotate-180"
+                    )}
+                  />
+                </button>
+
+                {mobileMenu === "sectors" ? (
+                  <div className="mx-3 mb-3 rounded-none border border-black/10 bg-white p-3">
+                    <div className="grid gap-2">
+                      {navMenu.sectors.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                          onClick={() => setOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="rounded-none border border-black/10 bg-safety-light/60">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase tracking-wide text-safety-black"
+                  onClick={() =>
+                    setMobileMenu((current) =>
+                      current === "resources" ? null : "resources"
+                    )
+                  }
+                >
+                  Resources
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 transition-transform",
+                      mobileMenu === "resources" && "rotate-180"
+                    )}
+                  />
+                </button>
+
+                {mobileMenu === "resources" ? (
+                  <div className="mx-3 mb-3 rounded-none border border-black/10 bg-white p-3">
+                    <div className="grid gap-2">
+                      {navMenu.resources.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                          onClick={() => setOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              <Link
+                href="/careers"
+                className={cn(
+                  "text-sm font-bold uppercase tracking-wide",
+                  pathname === "/careers"
+                    ? "text-safety-yellow"
+                    : "text-safety-black"
+                )}
+                onClick={() => setOpen(false)}
+              >
+                Careers
+              </Link>
+              <Link
+                href="/contact"
+                className={cn(
+                  "text-sm font-bold uppercase tracking-wide",
+                  pathname === "/contact" ? "text-safety-yellow" : "text-safety-black"
+                )}
+                onClick={() => setOpen(false)}
+              >
+                Contact
+              </Link>
               <Link
                 href="/contact"
                 className="mt-2 inline-flex w-fit bg-safety-yellow px-4 py-2 text-xs font-black uppercase text-safety-black"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  setMobileMenu(null);
+                }}
               >
                 Get A Quote
               </Link>
             </nav>
+              </div>
+            </aside>
           </div>
         ) : null}
       </div>
