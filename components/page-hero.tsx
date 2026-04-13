@@ -20,11 +20,10 @@ export function PageHero({
         src={getAsset(imageIndex)}
         alt={title}
         fill
-        className="object-cover opacity-40"
+        className="object-cover"
         priority
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(252,194,0,0.35),transparent_60%)]" />
-      <div className="absolute inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-25" />
+      <div className="absolute inset-0 bg-black/45" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24">
         <p className="inline-flex bg-safety-yellow px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-safety-black">

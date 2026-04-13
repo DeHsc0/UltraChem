@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --safety-yellow: #fcc200;
-  --safety-black: #1a1a1a;
-  --safety-gray: #666666;
-  --safety-light: #f4f4f4;
+  --safety-yellow: #22c55e;
+  --safety-black: #0b2b4a;
+  --safety-gray: #4f6b86;
+  --safety-light: #eaf3ff;
 }
 
 * {
@@ -23,8 +23,9 @@ body {
   font-family: var(--font-body), sans-serif;
   color: var(--safety-black);
   background:
-    radial-gradient(circle at 85% 10%, rgba(252, 194, 0, 0.08), transparent 28%),
-    linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+    radial-gradient(circle at 85% 12%, rgba(34, 197, 94, 0.14), transparent 30%),
+    radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.12), transparent 28%),
+    linear-gradient(180deg, #f8fcff 0%, #eff8f3 100%);
 }
 
 h1,

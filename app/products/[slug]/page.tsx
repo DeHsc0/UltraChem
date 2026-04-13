@@ -48,10 +48,10 @@ export default async function ProductDetailsPage({ params }: ProductPageProps) {
           src={getAsset(productIndex + 2)}
           alt={product.name}
           fill
-          className="object-cover opacity-30"
+          className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(252,194,0,0.35),transparent_60%)]" />
+        <div className="absolute inset-0 bg-black/45" />
         <div className="container-shell relative py-12 sm:py-16">
           <p className="section-kicker">{product.category}</p>
           <h1 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-tight sm:text-5xl">

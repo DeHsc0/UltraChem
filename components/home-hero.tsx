@@ -48,10 +48,9 @@ export function HomeHero() {
         alt="UltraChem infrastructure materials"
         fill
         priority
-        className="object-cover opacity-35"
+        className="object-cover"
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(252,194,0,0.35),transparent_55%)]" />
-      <div className="absolute inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-25" />
+      <div className="absolute inset-0 bg-black/45" />
 
       <div className="container-shell relative py-24 sm:py-28">
         <p className="section-kicker">Industrial Grade Construction Chemistry</p>
