@@ -37,6 +37,90 @@ export const menuLinks = [
   { label: "Contact", href: "/contact" }
 ];
 
+export const navMenu = {
+  about: [
+    { label: "Company Profile", href: "/about" },
+    { label: "Vision & Mission", href: "/about#vision" },
+    { label: "Core Competence", href: "/about#services" },
+    { label: "Technical Services", href: "/about#services" },
+    { label: "Quality Assurance", href: "/about#services" }
+  ],
+  products: [
+    {
+      label: "Crystalline Durability Admixture",
+      href: "/products/ultraheal-2106"
+    },
+    {
+      label: "Concrete Admixtures",
+      href: "/products",
+      children: [
+        { label: "ULTRAMIX PC-M", href: "/products/ultramix-pc-m" },
+        { label: "ULTRAMIX PC-H", href: "/products/ultramix-pc-h" },
+        { label: "ULTRAMIX PC", href: "/products/ultramix-pc" }
+      ]
+    },
+    {
+      label: "Corrosion Inhibitors",
+      href: "/products",
+      children: [
+        { label: "UltraShield TTCI", href: "/products/ultrashield-ttci" },
+        { label: "UltraGuard ST", href: "/products/ultraguard-st" },
+        { label: "ULTRASHIELD 0702", href: "/products/ultrashield-0702" }
+      ]
+    },
+    {
+      label: "Curing Compounds",
+      href: "/products",
+      children: [
+        { label: "UltraCure RB7", href: "/products/ultracure-rb7" },
+        { label: "UltraCure WB", href: "/products/ultracure-wb" },
+        { label: "ULTRACURE RB 7", href: "/products/ultracure-rb-7" },
+        { label: "ULTRACURE WB 7", href: "/products/ultracure-wb-7" }
+      ]
+    },
+    {
+      label: "Joint Sealants",
+      href: "/products",
+      children: [
+        {
+          label: "Polysulphide Sealant (PS)",
+          href: "/products/polysulphide-sealant-ps"
+        },
+        { label: "Polyurethane Sealant (PU)", href: "/products/ultraseal-pu" },
+        { label: "UltraPrime", href: "/products/ultraprime" }
+      ]
+    },
+    {
+      label: "Waterproofing Systems",
+      href: "/products",
+      children: [
+        { label: "UltraDeck Seal", href: "/products/ultradeck-seal" },
+        { label: "UltraLiquid Plus", href: "/products/ultraliquid-plus" }
+      ]
+    }
+  ],
+  sectors: [
+    { label: "Infrastructure Projects", href: "/sectors" },
+    { label: "Highways & Expressways", href: "/sectors" },
+    { label: "Bridges & Flyovers", href: "/sectors" },
+    { label: "Metro & Rail", href: "/sectors" },
+    { label: "Ports & Airports", href: "/sectors" },
+    { label: "Irrigation & Canals", href: "/sectors" },
+    { label: "Industrial Structures", href: "/sectors" },
+    { label: "Commercial Buildings", href: "/sectors" },
+    { label: "Residential Projects", href: "/sectors" },
+    { label: "Water Retaining Structures", href: "/sectors" },
+    { label: "STP / WTP Facilities", href: "/sectors" }
+  ],
+  resources: [
+    { label: "Downloads", href: "/resources#downloads" },
+    { label: "Product Catalogue", href: "/resources#downloads" },
+    { label: "Technical Data Sheets", href: "/resources#downloads" },
+    { label: "Brochures", href: "/resources#downloads" },
+    { label: "Gallery", href: "/resources" }
+  ]
+};
+
 export const categories = [
   {
     name: "Crystalline Durability Admixture",
@@ -100,6 +184,44 @@ export const homeFlowHighlights = [
 
 export const productCatalog: Product[] = [
   {
+    slug: "ultramix-pc-m",
+    name: "ULTRAMIX PC-M",
+    category: "Concrete Admixtures",
+    subtitle: "Mid-Range PCE Based Admixture",
+    description:
+      "A balanced water-reducing admixture for general high-grade concrete requiring strong workability and reliable finish control.",
+    features: [
+      "Improves workability and pumpability",
+      "Helps optimize setting time",
+      "Supports high-grade concrete consistency"
+    ],
+    applications: [
+      "General infrastructure and building concrete",
+      "Pumped concrete and slabs",
+      "Precast and ready-mix applications"
+    ],
+    tdsUrl: "/resources#downloads"
+  },
+  {
+    slug: "ultramix-pc-h",
+    name: "ULTRAMIX PC-H",
+    category: "Concrete Admixtures",
+    subtitle: "High-Performance PCE Based Admixture",
+    description:
+      "A stronger superplasticizer option for demanding concrete mixes that need higher water reduction and retained workability.",
+    features: [
+      "High water reduction potential",
+      "Good slump retention",
+      "Suitable for high-performance concrete"
+    ],
+    applications: [
+      "Bridge decks and high-rise structures",
+      "Pumped and self-compacting concrete",
+      "Precast and critical structural pours"
+    ],
+    tdsUrl: "/resources#downloads"
+  },
+  {
     slug: "ultramix-pc",
     name: "ULTRAMIX PC",
     category: "Concrete Admixtures",
@@ -116,6 +238,25 @@ export const productCatalog: Product[] = [
       "Self-compacting and pumped concrete",
       "Precast units, highways, and bridge decks",
       "High-rise and infrastructure grade concrete"
+    ],
+    tdsUrl: "/resources#downloads"
+  },
+  {
+    slug: "ultrashield-ttci",
+    name: "UltraShield TTCI",
+    category: "Corrosion Inhibitors",
+    subtitle: "Traversing Type Corrosion Inhibitor",
+    description:
+      "A penetrating corrosion inhibitor designed to move through concrete and protect reinforcement in aggressive chloride exposure.",
+    features: [
+      "Migrates through concrete pore structure",
+      "Forms protective layer on steel",
+      "Ideal for chloride-prone exposure"
+    ],
+    applications: [
+      "Marine and coastal structures",
+      "Repair and rehabilitation works",
+      "Infrastructure requiring extended service life"
     ],
     tdsUrl: "/resources#downloads"
   },
@@ -140,6 +281,25 @@ export const productCatalog: Product[] = [
     tdsUrl: "/resources#downloads"
   },
   {
+    slug: "ultracure-rb7",
+    name: "UltraCure RB7",
+    category: "Curing Compounds",
+    subtitle: "Resin Based Curing Compound",
+    description:
+      "Resin curing system aligned with the brochure naming used in the navigation structure.",
+    features: [
+      "Reduces water evaporation",
+      "Ensures proper hydration",
+      "Supports strength development"
+    ],
+    applications: [
+      "Infrastructure project concrete",
+      "Exposed concrete surfaces",
+      "Mass concrete works"
+    ],
+    tdsUrl: "/resources#downloads"
+  },
+  {
     slug: "ultracure-wb-7",
     name: "ULTRACURE WB 7",
     category: "Curing Compounds",
@@ -156,6 +316,25 @@ export const productCatalog: Product[] = [
       "Highways and rigid pavements",
       "Slabs, columns, beams, and retaining walls",
       "Foundations, roof decks, canals, runways, and taxiways"
+    ],
+    tdsUrl: "/resources#downloads"
+  },
+  {
+    slug: "ultracure-wb",
+    name: "UltraCure WB",
+    category: "Curing Compounds",
+    subtitle: "White Pigmented Paraffin Based Curing Compound",
+    description:
+      "White pigmented curing compound variant aligned with the site navigation shorthand.",
+    features: [
+      "Impermeable curing film",
+      "Reduces evaporation of mixing water",
+      "Supports proper hydration"
+    ],
+    applications: [
+      "Highways and rigid pavements",
+      "Slabs, beams, and retaining walls",
+      "Roof decks and taxiways"
     ],
     tdsUrl: "/resources#downloads"
   },
@@ -182,6 +361,25 @@ export const productCatalog: Product[] = [
     tdsUrl: "/resources#downloads"
   },
   {
+    slug: "ultraliquid-plus",
+    name: "UltraLiquid Plus",
+    category: "Waterproofing Systems",
+    subtitle: "Polyurethane Liquid Waterproofing Membrane",
+    description:
+      "Alias entry for the brochure naming of UltraLiquid Plus, used in the navigation dropdown.",
+    features: [
+      "Thixotropic on vertical surfaces",
+      "Excellent substrate adhesion",
+      "Flexible membrane for movement"
+    ],
+    applications: [
+      "Roofs and terraces",
+      "Basements and foundations",
+      "Marine and chemical environments"
+    ],
+    tdsUrl: "/resources#downloads"
+  },
+  {
     slug: "ultra-seal-ps",
     name: "ULTRA SEAL PS",
     category: "Joint Sealants",
@@ -196,6 +394,25 @@ export const productCatalog: Product[] = [
     applications: [
       "Expansion joints in buildings and industrial floors",
       "Airports, runways, roads, and bridge expansion systems"
+    ],
+    tdsUrl: "/resources#downloads"
+  },
+  {
+    slug: "polysulphide-sealant-ps",
+    name: "Polysulphide Sealant (PS)",
+    category: "Joint Sealants",
+    subtitle: "Two Component Rapid Curing Cold Applied Sealant",
+    description:
+      "Alias naming used for the dropdown hierarchy and brochure flow.",
+    features: [
+      "Excellent adhesion",
+      "Long-term flexibility",
+      "Resistance to fuels, oils, and UV"
+    ],
+    applications: [
+      "Expansion joints in buildings",
+      "Pavements and industrial floors",
+      "Infrastructure works"
     ],
     tdsUrl: "/resources#downloads"
   },
@@ -220,6 +437,25 @@ export const productCatalog: Product[] = [
     tdsUrl: "/resources#downloads"
   },
   {
+    slug: "ultraprime",
+    name: "UltraPrime",
+    category: "Joint Sealants",
+    subtitle: "Single Component Primer",
+    description:
+      "Primer for polysulphide systems and porous surfaces, matching the short form used in navigation.",
+    features: [
+      "Improves adhesion",
+      "Easy low-viscosity application",
+      "Reduces porosity-related bubbling"
+    ],
+    applications: [
+      "Primer for joint sealants",
+      "Concrete grooves and bricks",
+      "Porous surface treatment"
+    ],
+    tdsUrl: "/resources#downloads"
+  },
+  {
     slug: "ultraheal-2106",
     name: "ULTRAHEAL 2106",
     category: "Crystalline Durability Admixture",
@@ -238,24 +474,6 @@ export const productCatalog: Product[] = [
       "Infrastructure and transport corridors",
       "Marine and coastal structures",
       "Water-immersed concrete systems"
-    ],
-    tdsUrl: "/resources#downloads"
-  },
-  {
-    slug: "ultra-prime",
-    name: "ULTRA PRIME",
-    category: "Joint Sealants",
-    subtitle: "Single Component Primer for Ultra Seal PS",
-    description:
-      "Low-viscosity primer to improve substrate bonding and reduce porosity-related defects in sealant applications.",
-    features: [
-      "Excellent adhesion to concrete and metal",
-      "High tensile and shear bond development",
-      "Low viscosity and easy application"
-    ],
-    applications: [
-      "Primer for polysulphide sealants under movement",
-      "Porous grooves and masonry surfaces before sealing"
     ],
     tdsUrl: "/resources#downloads"
   },
