@@ -16,7 +16,7 @@ type DropdownLink = {
 type DesktopMenu = {
   label: string;
   href: string;
-  kind: "simple" | "mega";
+  kind: "link" | "simple" | "mega" | "resource";
   links: DropdownLink[];
   note?: string;
 };
@@ -25,8 +25,8 @@ const desktopMenus: DesktopMenu[] = [
   {
     label: "About Us",
     href: "/about",
-    kind: "simple",
-    links: navMenu.about
+    kind: "link",
+    links: []
   },
   {
     label: "Products",
@@ -39,27 +39,26 @@ const desktopMenus: DesktopMenu[] = [
           : [{ label: group.label, href: group.href }]
       )
     ],
-    note: "Hover a category, then select the exact product page"
+    note: "Click a category, then select the exact product page"
   },
   {
     label: "Sectors",
     href: "/sectors",
-    kind: "simple",
-    links: navMenu.sectors
+    kind: "link",
+    links: []
   },
   {
     label: "Resources",
     href: "/resources",
-    kind: "simple",
-    links: navMenu.resources
+    kind: "resource",
+    links: []
   }
 ];
 
-function DropdownPanel({
-  menu
-}: {
-  menu: DesktopMenu;
-}) {
+function DropdownPanel({ menu }: { menu: DesktopMenu }) {
+  const [activeGroup, setActiveGroup] = useState<string | null>(null);
+  const [resourcesDownloadsOpen, setResourcesDownloadsOpen] = useState(false);
+
   if (menu.kind === "simple") {
     return (
       <div className="absolute left-1/2 top-full z-50 w-[18rem] -translate-x-1/2 pt-1 opacity-0 invisible transition duration-150 group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible">
@@ -80,13 +79,93 @@ function DropdownPanel({
     );
   }
 
+  if (menu.kind !== "mega") {
+    if (menu.kind !== "resource") {
+      return null;
+    }
+
+    return (
+      <div className="absolute left-1/2 top-full z-50 w-[min(24rem,92vw)] -translate-x-1/2 pt-1 opacity-0 invisible transition duration-150 group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible">
+        <div className="border border-black/10 bg-white p-3 shadow-panel">
+          <div className="space-y-2">
+            <div
+              className="cursor-pointer rounded-none border border-black/10 bg-safety-light/30 p-2.5"
+              role="button"
+              tabIndex={0}
+              aria-expanded={resourcesDownloadsOpen}
+              onClick={(event) => {
+                const target = event.target as HTMLElement;
+                if (target.closest("a")) {
+                  return;
+                }
+                setResourcesDownloadsOpen((current) => !current);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setResourcesDownloadsOpen((current) => !current);
+                }
+              }}
+            >
+              <div className="flex w-full items-center justify-between border-l-4 border-safety-yellow pl-3 text-left text-sm font-black uppercase tracking-wide text-safety-black transition hover:text-safety-yellow">
+                <span>Downloads</span>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-150",
+                    resourcesDownloadsOpen && "rotate-180"
+                  )}
+                />
+              </div>
+              <div
+                className={cn(
+                  "mt-2 space-y-1 pl-3",
+                  resourcesDownloadsOpen ? "block" : "hidden"
+                )}
+              >
+                <Link
+                  href="/Prodcut-Catlouge-UltraChem.pdf"
+                  className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray transition hover:bg-white hover:text-safety-black"
+                >
+                  Product Catalogue
+                </Link>
+                <Link
+                  href="/resources#downloads"
+                  className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray transition hover:bg-white hover:text-safety-black"
+                >
+                  Technical Data Sheets
+                </Link>
+                <Link
+                  href="/Brochure-UltraChem.pdf"
+                  className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray transition hover:bg-white hover:text-safety-black"
+                >
+                  Brochures
+                </Link>
+              </div>
+            </div>
+
+            <Link
+              href="/gallery"
+              className="block rounded-none border border-black/10 bg-safety-light/30 px-3 py-2 text-sm font-black uppercase tracking-wide text-safety-black transition hover:border-safety-yellow hover:text-safety-yellow"
+            >
+              Gallery
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const groups = [
+    {
+      heading: "Crystalline Durability Admixture",
+      href: "/products/ultraheal-2106",
+      links: []
+    },
     {
       heading: "Concrete Admixtures",
       links: [
         { label: "ULTRAMIX PC-M", href: "/products/ultramix-pc-m" },
-        { label: "ULTRAMIX PC-H", href: "/products/ultramix-pc-h" },
-        { label: "ULTRAMIX PC", href: "/products/ultramix-pc" }
+        { label: "ULTRAMIX PC-H", href: "/products/ultramix-pc-h" }
       ]
     },
     {
@@ -124,40 +203,77 @@ function DropdownPanel({
   ];
 
   return (
-    <div className="absolute left-1/2 top-full z-50 w-[min(72rem,92vw)] -translate-x-1/2 pt-1 opacity-0 invisible transition duration-150 group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible">
-      <div className="border border-black/10 bg-white p-4 shadow-panel">
-        <div className="mb-3 flex items-center justify-between border-b border-black/10 pb-3">
-          <p className="text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
-            {menu.note}
-          </p>
-          <Link
-            href={menu.href}
-            className="text-xs font-black uppercase tracking-[0.2em] text-safety-yellow"
-          >
-            View All Products
-          </Link>
-        </div>
+    <div className="absolute left-1/2 top-full z-50 w-[min(34rem,92vw)] -translate-x-1/2 pt-1 opacity-0 invisible transition duration-150 group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible">
+      <div className="border border-black/10 bg-white p-3 shadow-panel">
+        
+        
 
-        <div className="grid gap-4 xl:grid-cols-5">
+        <div className="max-h-[65vh] space-y-2 overflow-y-auto pr-1">
           {groups.map((group) => (
-            <div key={group.heading} className="space-y-2">
-              <Link
-                href="/products"
-                className="block border-l-4 border-safety-yellow pl-3 text-sm font-black uppercase tracking-wide text-safety-black hover:text-safety-yellow"
-              >
-                {group.heading}
-              </Link>
-              <div className="space-y-1 pl-3">
-                {group.links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray transition hover:bg-safety-light hover:text-safety-black"
+            <div
+              key={group.heading}
+              className="rounded-none border border-black/10 bg-safety-light/30 p-2.5"
+            >
+              {group.links.length === 0 ? (
+                <Link
+                  href={group.href ?? "/products"}
+                  className="block border-l-4 border-safety-yellow pl-3 text-sm font-black uppercase tracking-wide text-safety-black transition hover:text-safety-yellow"
+                >
+                  {group.heading}
+                </Link>
+              ) : (
+                <>
+                  <div
+                    className="cursor-pointer"
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded={activeGroup === group.heading}
+                    onClick={(event) => {
+                      const target = event.target as HTMLElement;
+                      if (target.closest("a")) {
+                        return;
+                      }
+                      setActiveGroup((current) =>
+                        current === group.heading ? null : group.heading
+                      );
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        setActiveGroup((current) =>
+                          current === group.heading ? null : group.heading
+                        );
+                      }
+                    }}
                   >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
+                    <div className="flex w-full items-center justify-between border-l-4 border-safety-yellow pl-3 text-left text-sm font-black uppercase tracking-wide text-safety-black transition hover:text-safety-yellow">
+                      <span>{group.heading}</span>
+                      <ChevronDown
+                        className={cn(
+                          "h-4 w-4 transition-transform duration-150",
+                          activeGroup === group.heading && "rotate-180"
+                        )}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className={cn(
+                      "mt-2 space-y-1 pl-3",
+                      activeGroup === group.heading ? "block" : "hidden"
+                    )}
+                  >
+                    {group.links.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray transition hover:bg-white hover:text-safety-black"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           ))}
         </div>
@@ -170,6 +286,8 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState<string | null>(null);
+  const [mobileResourcesDownloadsOpen, setMobileResourcesDownloadsOpen] =
+    useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   useEffect(() => {
@@ -210,49 +328,64 @@ export function SiteHeader() {
           </Link>
 
           <nav className="hidden items-stretch lg:flex">
-            {desktopMenus.map((menu) => (
-              <div
-                key={menu.label}
-                className="group relative"
-                onMouseEnter={() => setActiveMenu(menu.label)}
-                onMouseLeave={() => setActiveMenu(null)}
-                onFocusCapture={() => setActiveMenu(menu.label)}
-                onBlurCapture={(event) => {
-                  if (!event.currentTarget.contains(event.relatedTarget as Node)) {
-                    setActiveMenu(null);
-                  }
-                }}
-              >
+            {desktopMenus.map((menu) =>
+              menu.kind === "link" ? (
                 <Link
+                  key={menu.label}
                   href={menu.href}
                   className={cn(
-                    "inline-flex h-full items-center gap-1 px-4 py-6 text-sm font-black uppercase tracking-wide transition-colors",
+                    "inline-flex h-full items-center px-4 py-6 text-sm font-black uppercase tracking-wide transition-colors",
                     pathname.startsWith(menu.href)
                       ? "text-safety-yellow"
                       : "text-safety-black hover:text-safety-yellow"
                   )}
-                  >
-                  {menu.label}
-                  <ChevronDown className="h-4 w-4" />
-                </Link>
-                <div
-                  className={cn(
-                    "pointer-events-none",
-                    activeMenu === menu.label && "pointer-events-auto"
-                  )}
                 >
-                  <div
+                  {menu.label}
+                </Link>
+              ) : (
+                <div
+                  key={menu.label}
+                  className="group relative"
+                  onMouseEnter={() => setActiveMenu(menu.label)}
+                  onMouseLeave={() => setActiveMenu(null)}
+                  onFocusCapture={() => setActiveMenu(menu.label)}
+                  onBlurCapture={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                      setActiveMenu(null);
+                    }
+                  }}
+                >
+                  <Link
+                    href={menu.href}
                     className={cn(
-                      activeMenu === menu.label
-                        ? "opacity-100 visible"
-                        : "opacity-0 invisible"
+                      "inline-flex h-full items-center gap-1 px-4 py-6 text-sm font-black uppercase tracking-wide transition-colors",
+                      pathname.startsWith(menu.href)
+                        ? "text-safety-yellow"
+                        : "text-safety-black hover:text-safety-yellow"
                     )}
                   >
-                    <DropdownPanel menu={menu} />
+                    {menu.label}
+                    <ChevronDown className="h-4 w-4" />
+                  </Link>
+                  <div
+                    className={cn(
+                      "pointer-events-none",
+                      activeMenu === menu.label && "pointer-events-auto"
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        activeMenu === menu.label
+                          ? "opacity-100 visible"
+                          : "opacity-0 invisible"
+                      )}
+                    >
+                      <DropdownPanel menu={menu} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            )}
 
             <Link
               href="/careers"
@@ -303,6 +436,7 @@ export function SiteHeader() {
               onClick={() => {
                 setOpen(false);
                 setMobileMenu(null);
+                setMobileResourcesDownloadsOpen(false);
               }}
               aria-label="Close menu backdrop"
             />
@@ -318,6 +452,7 @@ export function SiteHeader() {
                   onClick={() => {
                     setOpen(false);
                     setMobileMenu(null);
+                    setMobileResourcesDownloadsOpen(false);
                   }}
                   aria-label="Close menu"
                 >
@@ -327,295 +462,313 @@ export function SiteHeader() {
 
               <div className="px-4 py-4">
                 <nav className="flex flex-col gap-3">
-              <Link
-                href="/about"
-                className={cn(
-                  "text-sm font-bold uppercase tracking-wide",
-                  pathname === "/about" ? "text-safety-yellow" : "text-safety-black"
-                )}
-                onClick={() => setOpen(false)}
-              >
-                About Us
-              </Link>
-
-              <div className="rounded-none border border-black/10 bg-safety-light/60">
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase tracking-wide text-safety-black"
-                  onClick={() =>
-                    setMobileMenu((current) =>
-                      current === "products" ? null : "products"
-                    )
-                  }
-                >
-                  Products
-                  <ChevronDown
+                  <Link
+                    href="/about"
                     className={cn(
-                      "h-4 w-4 transition-transform",
-                      mobileMenu === "products" && "rotate-180"
+                      "text-sm font-bold uppercase tracking-wide",
+                      pathname === "/about"
+                        ? "text-safety-yellow"
+                        : "text-safety-black"
                     )}
-                  />
-                </button>
+                    onClick={() => setOpen(false)}
+                  >
+                    About Us
+                  </Link>
 
-                {mobileMenu === "products" ? (
-                  <div className="mx-3 mb-3 rounded-none border border-black/10 bg-white p-3">
-                    <div className="space-y-3">
-                      <div>
-                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
-                          Concrete Admixtures
-                        </p>
-                        <div className="mt-2 space-y-1 pl-4">
+                  <div className="rounded-none border border-black/10 bg-safety-light/60">
+                    <button
+                      type="button"
+                      className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase tracking-wide text-safety-black"
+                      onClick={() =>
+                        setMobileMenu((current) =>
+                          current === "products" ? null : "products"
+                        )
+                      }
+                    >
+                      Products
+                      <ChevronDown
+                        className={cn(
+                          "h-4 w-4 transition-transform",
+                          mobileMenu === "products" && "rotate-180"
+                        )}
+                      />
+                    </button>
+
+                    {mobileMenu === "products" ? (
+                      <div className="mx-3 mb-3 rounded-none border border-black/10 bg-white p-3">
+                        <div className="space-y-3">
                           <Link
-                            href="/products/ultramix-pc-m"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            href="/products/ultraheal-2106"
+                            className="block border-l-4 border-safety-yellow pl-3 text-sm font-black uppercase tracking-wide text-safety-black hover:text-safety-yellow"
                             onClick={() => setOpen(false)}
                           >
-                            ULTRAMIX PC-M
+                            Crystalline Durability Admixture
                           </Link>
-                          <Link
-                            href="/products/ultramix-pc-h"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            ULTRAMIX PC-H
-                          </Link>
-                          <Link
-                            href="/products/ultramix-pc"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            ULTRAMIX PC
-                          </Link>
+
+                          <div>
+                            <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                              Concrete Admixtures
+                            </p>
+                            <div className="mt-2 space-y-1 pl-4">
+                              <Link
+                                href="/products/ultramix-pc-m"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                ULTRAMIX PC-M
+                              </Link>
+                              <Link
+                                href="/products/ultramix-pc-h"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                ULTRAMIX PC-H
+                              </Link>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                              Corrosion Inhibitors
+                            </p>
+                            <div className="mt-2 space-y-1 pl-4">
+                              <Link
+                                href="/products/ultrashield-ttci"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                UltraShield TTCI
+                              </Link>
+                              <Link
+                                href="/products/ultraguard-st"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                UltraGuard ST
+                              </Link>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                              Curing Compounds
+                            </p>
+                            <div className="mt-2 space-y-1 pl-4">
+                              <Link
+                                href="/products/ultracure-rb7"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                UltraCure RB7
+                              </Link>
+                              <Link
+                                href="/products/ultracure-wb"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                UltraCure WB
+                              </Link>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                              Joint Sealants
+                            </p>
+                            <div className="mt-2 space-y-1 pl-4">
+                              <Link
+                                href="/products/polysulphide-sealant-ps"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                Polysulphide Sealant (PS)
+                              </Link>
+                              <Link
+                                href="/products/ultraseal-pu"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                Polyurethane Sealant (PU)
+                              </Link>
+                              <Link
+                                href="/products/ultraprime"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                UltraPrime
+                              </Link>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
+                              Waterproofing Systems
+                            </p>
+                            <div className="mt-2 space-y-1 pl-4">
+                              <Link
+                                href="/products/ultradeck-seal"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                UltraDeck Seal
+                              </Link>
+                              <Link
+                                href="/products/ultraliquid-plus"
+                                className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                onClick={() => setOpen(false)}
+                              >
+                                UltraLiquid Plus
+                              </Link>
+                            </div>
+                          </div>
                         </div>
                       </div>
-
-                      <div>
-                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
-                          Corrosion Inhibitors
-                        </p>
-                        <div className="mt-2 space-y-1 pl-4">
-                          <Link
-                            href="/products/ultrashield-ttci"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            UltraShield TTCI
-                          </Link>
-                          <Link
-                            href="/products/ultraguard-st"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            UltraGuard ST
-                          </Link>
-                          <Link
-                            href="/products/ultrashield-0702"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            ULTRASHIELD 0702
-                          </Link>
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
-                          Curing Compounds
-                        </p>
-                        <div className="mt-2 space-y-1 pl-4">
-                          <Link
-                            href="/products/ultracure-rb7"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            UltraCure RB7
-                          </Link>
-                          <Link
-                            href="/products/ultracure-wb"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            UltraCure WB
-                          </Link>
-                          <Link
-                            href="/products/ultracure-rb-7"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            ULTRACURE RB 7
-                          </Link>
-                          <Link
-                            href="/products/ultracure-wb-7"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            ULTRACURE WB 7
-                          </Link>
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
-                          Joint Sealants
-                        </p>
-                        <div className="mt-2 space-y-1 pl-4">
-                          <Link
-                            href="/products/polysulphide-sealant-ps"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            Polysulphide Sealant (PS)
-                          </Link>
-                          <Link
-                            href="/products/ultraseal-pu"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            Polyurethane Sealant (PU)
-                          </Link>
-                          <Link
-                            href="/products/ultraprime"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            UltraPrime
-                          </Link>
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="border-l-4 border-safety-yellow pl-3 text-xs font-black uppercase tracking-[0.2em] text-safety-gray">
-                          Waterproofing Systems
-                        </p>
-                        <div className="mt-2 space-y-1 pl-4">
-                          <Link
-                            href="/products/ultradeck-seal"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            UltraDeck Seal
-                          </Link>
-                          <Link
-                            href="/products/ultraliquid-plus"
-                            className="block py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                            onClick={() => setOpen(false)}
-                          >
-                            UltraLiquid Plus
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
+                    ) : null}
                   </div>
-                ) : null}
-              </div>
 
-              <div className="rounded-none border border-black/10 bg-safety-light/60">
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase tracking-wide text-safety-black"
-                  onClick={() =>
-                    setMobileMenu((current) =>
-                      current === "sectors" ? null : "sectors"
-                    )
-                  }
-                >
-                  Sectors
-                  <ChevronDown
+                  <Link
+                    href="/sectors"
                     className={cn(
-                      "h-4 w-4 transition-transform",
-                      mobileMenu === "sectors" && "rotate-180"
+                      "text-sm font-bold uppercase tracking-wide",
+                      pathname === "/sectors"
+                        ? "text-safety-yellow"
+                        : "text-safety-black"
                     )}
-                  />
-                </button>
+                    onClick={() => setOpen(false)}
+                  >
+                    Sectors
+                  </Link>
 
-                {mobileMenu === "sectors" ? (
-                  <div className="mx-3 mb-3 rounded-none border border-black/10 bg-white p-3">
-                    <div className="grid gap-2">
-                      {navMenu.sectors.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                          onClick={() => setOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
+                  <div className="rounded-none border border-black/10 bg-safety-light/60">
+                    <button
+                      type="button"
+                      className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase tracking-wide text-safety-black"
+                      onClick={() =>
+                        setMobileMenu((current) => {
+                          const next = current === "resources" ? null : "resources";
+                          if (next !== "resources") {
+                            setMobileResourcesDownloadsOpen(false);
+                          }
+                          return next;
+                        })
+                      }
+                    >
+                      Resources
+                      <ChevronDown
+                        className={cn(
+                          "h-4 w-4 transition-transform",
+                          mobileMenu === "resources" && "rotate-180"
+                        )}
+                      />
+                    </button>
+
+                    {mobileMenu === "resources" ? (
+                      <div className="mx-3 mb-3 rounded-none border border-black/10 bg-white p-3">
+                        <div className="space-y-2">
+                          <div
+                            className="cursor-pointer rounded-none border border-black/10 bg-safety-light/30 p-2.5"
+                            role="button"
+                            tabIndex={0}
+                            aria-expanded={mobileResourcesDownloadsOpen}
+                            onClick={(event) => {
+                              const target = event.target as HTMLElement;
+                              if (target.closest("a")) {
+                                return;
+                              }
+                              setMobileResourcesDownloadsOpen((current) => !current);
+                            }}
+                            onKeyDown={(event) => {
+                              if (event.key === "Enter" || event.key === " ") {
+                                event.preventDefault();
+                                setMobileResourcesDownloadsOpen((current) => !current);
+                              }
+                            }}
+                          >
+                            <div className="flex w-full items-center justify-between border-l-4 border-safety-yellow pl-3 text-left text-sm font-black uppercase tracking-wide text-safety-black">
+                              Downloads
+                              <ChevronDown
+                                className={cn(
+                                  "h-4 w-4 transition-transform",
+                                  mobileResourcesDownloadsOpen && "rotate-180"
+                                )}
+                              />
+                            </div>
+
+                            {mobileResourcesDownloadsOpen ? (
+                              <div className="mt-2 space-y-1 pl-3">
+                                <Link
+                                  href="/Prodcut-Catlouge-UltraChem.pdf"
+                                  className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                  onClick={() => setOpen(false)}
+                                >
+                                  Product Catalogue
+                                </Link>
+                                <Link
+                                  href="/resources#downloads"
+                                  className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                  onClick={() => setOpen(false)}
+                                >
+                                  Technical Data Sheets
+                                </Link>
+                                <Link
+                                  href="/Brochure-UltraChem.pdf"
+                                  className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                                  onClick={() => setOpen(false)}
+                                >
+                                  Brochures
+                                </Link>
+                              </div>
+                            ) : null}
+                          </div>
+
+                          <Link
+                            href="/gallery"
+                            className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
+                            onClick={() => setOpen(false)}
+                          >
+                            Gallery
+                          </Link>
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
-                ) : null}
-              </div>
 
-              <div className="rounded-none border border-black/10 bg-safety-light/60">
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase tracking-wide text-safety-black"
-                  onClick={() =>
-                    setMobileMenu((current) =>
-                      current === "resources" ? null : "resources"
-                    )
-                  }
-                >
-                  Resources
-                  <ChevronDown
+                  <Link
+                    href="/careers"
                     className={cn(
-                      "h-4 w-4 transition-transform",
-                      mobileMenu === "resources" && "rotate-180"
+                      "text-sm font-bold uppercase tracking-wide",
+                      pathname === "/careers"
+                        ? "text-safety-yellow"
+                        : "text-safety-black"
                     )}
-                  />
-                </button>
-
-                {mobileMenu === "resources" ? (
-                  <div className="mx-3 mb-3 rounded-none border border-black/10 bg-white p-3">
-                    <div className="grid gap-2">
-                      {navMenu.resources.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          className="block rounded-none px-2 py-1 text-sm font-medium text-safety-gray hover:text-safety-black"
-                          onClick={() => setOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-
-              <Link
-                href="/careers"
-                className={cn(
-                  "text-sm font-bold uppercase tracking-wide",
-                  pathname === "/careers"
-                    ? "text-safety-yellow"
-                    : "text-safety-black"
-                )}
-                onClick={() => setOpen(false)}
-              >
-                Careers
-              </Link>
-              <Link
-                href="/contact"
-                className={cn(
-                  "text-sm font-bold uppercase tracking-wide",
-                  pathname === "/contact" ? "text-safety-yellow" : "text-safety-black"
-                )}
-                onClick={() => setOpen(false)}
-              >
-                Contact
-              </Link>
-              <Link
-                href="/contact"
-                className="mt-2 inline-flex w-fit bg-safety-yellow px-4 py-2 text-xs font-black uppercase text-white"
-                onClick={() => {
-                  setOpen(false);
-                  setMobileMenu(null);
-                }}
-              >
-                Get A Quote
-              </Link>
-            </nav>
+                    onClick={() => setOpen(false)}
+                  >
+                    Careers
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className={cn(
+                      "text-sm font-bold uppercase tracking-wide",
+                      pathname === "/contact"
+                        ? "text-safety-yellow"
+                        : "text-safety-black"
+                    )}
+                    onClick={() => setOpen(false)}
+                  >
+                    Contact
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="mt-2 inline-flex w-fit bg-safety-yellow px-4 py-2 text-xs font-black uppercase text-white"
+                    onClick={() => {
+                      setOpen(false);
+                      setMobileMenu(null);
+                      setMobileResourcesDownloadsOpen(false);
+                    }}
+                  >
+                    Get A Quote
+                  </Link>
+                </nav>
               </div>
             </aside>
           </div>

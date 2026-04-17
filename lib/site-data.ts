@@ -114,10 +114,10 @@ export const navMenu = {
   ],
   resources: [
     { label: "Downloads", href: "/resources#downloads" },
-    { label: "Product Catalogue", href: "/resources#downloads" },
+    { label: "Product Catalogue", href: "/Prodcut-Catlouge-UltraChem.pdf" },
     { label: "Technical Data Sheets", href: "/resources#downloads" },
-    { label: "Brochures", href: "/resources#downloads" },
-    { label: "Gallery", href: "/resources" }
+    { label: "Brochures", href: "/Brochure-UltraChem.pdf" },
+    { label: "Gallery", href: "/gallery" }
   ]
 };
 
@@ -553,6 +553,172 @@ export const sectors = [
   "STP / WTP Facilities"
 ];
 
+export type SectorProfile = {
+  slug: string;
+  title: string;
+  shortDescription: string;
+  detailDescription: string;
+  focusPoints: string[];
+  imageIndex: number;
+};
+
+export const sectorProfiles: SectorProfile[] = [
+  {
+    slug: "infrastructure-projects",
+    title: "Infrastructure Projects",
+    shortDescription:
+      "Integrated chemical systems for durable concrete in large public infrastructure with variable site and weather conditions.",
+    detailDescription:
+      "Infrastructure projects demand consistent performance across long execution cycles, multiple contractors, and changing exposure conditions. UltraChem systems help improve concrete quality, durability, and long-term service life in roads, utilities, transport corridors, and civic structures. We align admixture selection, curing strategy, and protection layers to reduce defects and maintenance loads over the project lifecycle.",
+    focusPoints: [
+      "Workability and strength consistency in high-volume pours",
+      "Durability against moisture ingress and environmental exposure",
+      "Site-focused technical support during execution stages"
+    ],
+    imageIndex: 1
+  },
+  {
+    slug: "highways-expressways",
+    title: "Highways & Expressways",
+    shortDescription:
+      "Performance solutions for pavements and structural concrete exposed to traffic loading, thermal cycles, and water.",
+    detailDescription:
+      "Highway and expressway assets face heavy axle loads, abrasion, and continuous climatic stress. UltraChem solutions support controlled workability, reliable curing, and improved surface durability to reduce cracking and premature deterioration. Systems are selected for both concrete pavements and associated structures where long service life and low disruption maintenance are critical.",
+    focusPoints: [
+      "Curing and moisture-retention performance for pavement quality",
+      "Crack and shrinkage risk reduction during early age concrete",
+      "Durability support under repetitive traffic and weather cycles"
+    ],
+    imageIndex: 2
+  },
+  {
+    slug: "bridges-flyovers",
+    title: "Bridges & Flyovers",
+    shortDescription:
+      "Corrosion and waterproofing-led protection for decks, piers, and sub-structures under aggressive exposure.",
+    detailDescription:
+      "Bridge and flyover components are vulnerable to chloride ingress, carbonation, and cyclic loading. UltraChem provides concrete performance enhancers, corrosion protection chemistry, and deck waterproofing systems to preserve reinforcement and structural integrity. The objective is to extend service intervals while maintaining reliability of high-movement transport links.",
+    focusPoints: [
+      "Corrosion mitigation in reinforcement-rich concrete sections",
+      "Waterproofing support for decks and expansion interfaces",
+      "Durability enhancement for high-exposure bridge environments"
+    ],
+    imageIndex: 3
+  },
+  {
+    slug: "metro-rail-projects",
+    title: "Metro & Rail Projects",
+    shortDescription:
+      "Application-oriented chemistry for viaducts, stations, tunnels, and precast elements in rail infrastructure.",
+    detailDescription:
+      "Metro and rail projects combine tight timelines with strict durability requirements across elevated and underground structures. UltraChem systems support pumpable concrete, controlled setting behavior, and waterproofing protection for stations, tunnels, and track-adjacent assets. Product selection is aligned with constructability, quality control, and exposure class needs.",
+    focusPoints: [
+      "Concrete flow and retention support for dense reinforcement zones",
+      "Waterproofing performance for underground and retaining works",
+      "Precast and cast-in-situ compatibility for rail applications"
+    ],
+    imageIndex: 4
+  },
+  {
+    slug: "ports-airports",
+    title: "Ports & Airports",
+    shortDescription:
+      "High-durability systems for marine and aviation infrastructure exposed to chloride, chemicals, and intense operational loads.",
+    detailDescription:
+      "Ports and airports operate in highly aggressive environments where chloride attack, fuel exposure, and high mechanical stress are common. UltraChem delivers corrosion-resistance, waterproofing, and sealing solutions tailored for runways, aprons, marine decks, and service structures. The focus is durable performance with minimal operational interruption.",
+    focusPoints: [
+      "Chloride-resistance support for coastal and marine structures",
+      "Protection layers for fuel, chemical, and weather exposure",
+      "Joint and surface systems for high-duty transport zones"
+    ],
+    imageIndex: 5
+  },
+  {
+    slug: "irrigation-canal-projects",
+    title: "Irrigation & Canal Projects",
+    shortDescription:
+      "Water-retention and seepage-control systems for canals, distributaries, and hydraulic structures.",
+    detailDescription:
+      "Hydraulic assets require robust waterproofing behavior and long-term stability to control leakage and preserve design flow efficiency. UltraChem solutions for irrigation and canal works improve concrete durability, reduce permeability, and support crack management in water-contact conditions. Systems are selected to perform under prolonged wet exposure and variable substrate conditions.",
+    focusPoints: [
+      "Permeability control for concrete in continuous water contact",
+      "Crack-sealing and waterproofing support for hydraulic sections",
+      "Service-life extension in canal and irrigation structures"
+    ],
+    imageIndex: 6
+  },
+  {
+    slug: "industrial-structures",
+    title: "Industrial Structures",
+    shortDescription:
+      "Concrete protection and joint systems for plants, warehouses, processing units, and utility blocks.",
+    detailDescription:
+      "Industrial structures often face chemical exposure, abrasion, thermal variation, and heavy operational movement. UltraChem systems help improve structural durability and protect joints and concrete interfaces in process and logistics environments. The approach balances technical robustness with maintainability in working facilities.",
+    focusPoints: [
+      "Resistance support in chemically aggressive operating conditions",
+      "Joint protection for movement and vibration-prone structures",
+      "Durability strategies for industrial slabs and structural members"
+    ],
+    imageIndex: 7
+  },
+  {
+    slug: "commercial-buildings",
+    title: "Commercial Buildings",
+    shortDescription:
+      "Reliable concrete and waterproofing systems for basements, podium decks, facades, and service zones.",
+    detailDescription:
+      "Commercial developments require clean execution, schedule reliability, and long-term waterproofing integrity. UltraChem supports concrete performance and moisture protection across basement walls, podium slabs, terraces, and utility cores. Solutions are selected to reduce rework risk and improve lifecycle performance of high-occupancy assets.",
+    focusPoints: [
+      "Waterproofing support for basements, podiums, and terraces",
+      "Concrete quality consistency in high-rise and mixed-use builds",
+      "Reduced maintenance exposure in occupied commercial assets"
+    ],
+    imageIndex: 8
+  },
+  {
+    slug: "residential-projects",
+    title: "Residential Projects",
+    shortDescription:
+      "Practical moisture-control and concrete durability solutions for apartments, townships, and housing infrastructure.",
+    detailDescription:
+      "Residential projects need dependable, scalable systems that deliver quality across multiple blocks and repetitive construction cycles. UltraChem solutions address waterproofing, crack-risk management, and durability in slabs, wet areas, terraces, and foundations. The emphasis is on preventing leakage-related issues and improving long-term occupant experience.",
+    focusPoints: [
+      "Waterproofing for terraces, wet areas, and basement interfaces",
+      "Concrete durability support for repeated project typologies",
+      "Crack-risk control to reduce post-handover repair cycles"
+    ],
+    imageIndex: 9
+  },
+  {
+    slug: "water-retaining-structures",
+    title: "Water Retaining Structures",
+    shortDescription:
+      "Integral durability and seepage-control chemistry for tanks, reservoirs, and containment structures.",
+    detailDescription:
+      "Water retaining structures demand low permeability, crack resilience, and reliable construction joints. UltraChem systems are designed to help concrete remain dense and protected in immersed conditions while supporting serviceability over long operation periods. Solutions are aligned with containment reliability and maintenance efficiency objectives.",
+    focusPoints: [
+      "Integral waterproofing support for dense concrete matrices",
+      "Joint and interface protection in retention structures",
+      "Durability enhancement under hydrostatic pressure conditions"
+    ],
+    imageIndex: 10
+  },
+  {
+    slug: "stp-wtp-facilities",
+    title: "STP / WTP Facilities",
+    shortDescription:
+      "Chemical-resistance and waterproofing support for treatment plants with continuous wet and corrosive exposure.",
+    detailDescription:
+      "Treatment plant structures are exposed to aggressive media, moisture, and cyclic operational conditions. UltraChem provides durability-oriented concrete systems, protective layers, and joint management support for clarifiers, tanks, channels, and process areas. The objective is long-term structural performance with reduced downtime risk in essential utilities.",
+    focusPoints: [
+      "Durability support for sulfate/chloride and process-media exposure",
+      "Waterproofing and sealing for tanks, channels, and process zones",
+      "Lifecycle-focused protection for utility-critical assets"
+    ],
+    imageIndex: 11
+  }
+];
+
 export const technicalServices = [
   "On-Site Technical Assistance",
   "Mix Design Support",
@@ -670,10 +836,28 @@ export const stats = [
 
 export const resources = {
   downloads: [
-    "Product Catalogue",
-    "Technical Data Sheets",
-    "System Application Guides",
-    "Corporate Brochure"
+    {
+      title: "Product Catalogue",
+      href: "/Prodcut-Catlouge-UltraChem.pdf",
+      ctaLabel: "Download Catalogue",
+      download: true
+    },
+    {
+      title: "Technical Data Sheets",
+      href: `mailto:${companyInfo.email}?subject=Request%20for%20Technical%20Data%20Sheets`,
+      ctaLabel: "Request TDS"
+    },
+    {
+      title: "System Application Guides",
+      href: `mailto:${companyInfo.email}?subject=Request%20for%20System%20Application%20Guides`,
+      ctaLabel: "Request Guide"
+    },
+    {
+      title: "Brochures",
+      href: "/Brochure-UltraChem.pdf",
+      ctaLabel: "Download Brochure",
+      download: true
+    }
   ],
   faqs: [
     {

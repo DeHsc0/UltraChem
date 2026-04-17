@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/products/ultramix-pc-m":{},"/products/ultramix-pc-h":{},"/products/ultramix-pc":{},"/products/ultrashield-ttci":{},"/products/ultracure-rb-7":{},"/products/ultracure-rb7":{},"/products/ultracure-wb-7":{},"/products/ultracure-wb":{},"/products/ultra-liquid-plus":{},"/products/ultraliquid-plus":{},"/products/ultra-seal-ps":{},"/products/polysulphide-sealant-ps":{},"/products/ultraseal-pu":{},"/products/ultraprime":{},"/products/ultraheal-2106":{},"/products/ultrashield-0702":{},"/products/ultraguard-st":{},"/products/ultradeck-seal":{}},"dynamicRoutes":{"/products/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/products/[slug]","routeRegex":"^\\/products\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"2f72675f3ca414ca5d6dedc42f2f8c29","previewModeSigningKey":"0974ff3ff613f14f95a11690f00c698f6a8a198162e676ea2454c9586f142e13","previewModeEncryptionKey":"820da4a347c6298f879a2d165cb449fbe848b661aa47d9e855e375554b9b4e98"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "fcfb2ad53c7ab87d06b0fd731f3bbc78",
+    "previewModeSigningKey": "4ac7263f2601c965aaa4f3f4c110d04f6c4c3dbad1a2ef2546408ceec75d07bd",
+    "previewModeEncryptionKey": "807b5428b958ef0becb91237e83f7bc16eeb680e90475338a88906a30691ab9a"
+  }
+}

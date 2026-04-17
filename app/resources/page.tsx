@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Download, FileText } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { GsapReveal } from "@/components/gsap-reveal";
@@ -31,17 +32,18 @@ export default function ResourcesPage() {
 
         <div className="mt-6 grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-4">
           {resources.downloads.map((item, index) => (
-            <GsapReveal key={item} delay={index * 0.08} className="h-full">
+            <GsapReveal key={item.title} delay={index * 0.08} className="h-full">
               <article className="panel h-full border-l-4 border-safety-yellow p-5">
                 <FileText className="h-5 w-5 text-safety-yellow" />
-                <h3 className="mt-3 text-xl font-black uppercase">{item}</h3>
-                <button
-                  type="button"
+                <h3 className="mt-3 text-xl font-black uppercase">{item.title}</h3>
+                <a
+                  href={item.href}
+                  download={item.download ? "" : undefined}
                   className="mt-4 inline-flex items-center gap-2 border border-safety-black px-3 py-2 text-xs font-black uppercase hover:border-safety-yellow hover:text-safety-yellow"
                 >
                   <Download className="h-3.5 w-3.5" />
-                  Request Download
-                </button>
+                  {item.ctaLabel}
+                </a>
               </article>
             </GsapReveal>
           ))}
@@ -51,10 +53,20 @@ export default function ResourcesPage() {
       <section className="bg-safety-light py-10 sm:py-14">
         <div className="container-shell">
           <GsapReveal>
-            <p className="section-kicker">Gallery</p>
-            <h2 className="mt-4 text-4xl font-black uppercase leading-tight">
-              Project Highlights
-            </h2>
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className="section-kicker">Gallery</p>
+                <h2 className="mt-4 text-4xl font-black uppercase leading-tight">
+                  Project Highlights
+                </h2>
+              </div>
+              <Link
+                href="/gallery"
+                className="hidden border-b-2 border-safety-yellow pb-1 text-sm font-black uppercase text-safety-black hover:text-safety-yellow sm:inline-block"
+              >
+                View Full Gallery
+              </Link>
+            </div>
           </GsapReveal>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -71,6 +83,12 @@ export default function ResourcesPage() {
               </GsapReveal>
             ))}
           </div>
+          <Link
+            href="/gallery"
+            className="mt-6 inline-block border-b-2 border-safety-yellow pb-1 text-sm font-black uppercase text-safety-black hover:text-safety-yellow sm:hidden"
+          >
+            View Full Gallery
+          </Link>
         </div>
       </section>
 
